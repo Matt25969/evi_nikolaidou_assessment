@@ -6,14 +6,14 @@ from  application import db,login_manager
 def load_user(id):
     return Users.query.get(int(id))
 
-class Favs(db.Model,UserMixin):
+class Posts(db.Model,UserMixin):
     id=db.Column(db.Integer,primary_key=True)
     year=db.Column(db.Integer,nullable=False)
     country=db.Column(db.String(100),nullable=False)
     performer=db.Column(db.String(1000),nullable=False)
     song=db.Column(db.String(1000), nullable=False)
 
-    user_id= db.Column(db.Integer,db.ForeingKey('users.id'),nullable=False)
+    user_id= db.Column(db.Integer,db.ForeignKey('users.id'), nullable=False)
 
     def __repr__(self):
         return ''.join([

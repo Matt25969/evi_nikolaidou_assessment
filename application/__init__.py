@@ -11,7 +11,7 @@ host=os.getenv('MYSQL_HOST')
 db=os.getenv('MYSQL_DATABASE')
 
 #app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:root@35.246.36.175/evie'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://{0]:[1]@{2}/{3}'.format(user, password, host, db)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://{0}:{1}@{2}/{3}'.format(user, password, host, db)
 db=SQLAlchemy()
 
 app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
