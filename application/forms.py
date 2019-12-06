@@ -8,6 +8,38 @@ from application import app
 login_manager = LoginManager(app)
 login_manager.login_view = 'login'
 
+class FavsForm(FlaskForm):
+    year = IntegerField('Year',
+         validators=[
+             DataRequired(),
+             Length(min=4, max=4)
+        ]
+     )
+
+    country = SpringField('Country',
+         validators=[
+             DataRequired(),
+             Length(min=4, max=50)
+        ]
+     )
+
+    performer = SpringField('Performer',
+         validators=[
+             DataRequired(),
+             Length(min=1, max=50)
+        ]
+     )
+
+    song = SpringField('Song',
+         validators=[
+             DataRequired(),
+             Length(min=1, max=10000)
+        ]
+     )
+
+     submit = SubmitField('Add to favorites!')
+     
+
 class LoginForm(FlaskForm):
     email = StringField('Email',
         validators=[

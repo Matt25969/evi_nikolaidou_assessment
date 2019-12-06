@@ -1,14 +1,31 @@
-from flask import render_template
-from application import app
+from flask import render_template,redirect,url_for, request
+from application import app, db, bcrypt
+from application.forms import PostForm, RegistrationForm, LoginForm
+from application.model import Posts, Users
+from flask_login import login_user, current_user, logout_user, login_required
 
 @app.route('/')
 @app.route('/about')
 def about():
     return render_template('about.html', title='Eurovision')
 
-@app.route('/favorites')
+@app.route('/favorites', methods=[ 'GET','POST'])
+@login_required
 def fsvorites():
-    return render_template('favorites.html', title='Eurovision')
+    form = PostForm()
+    if form.validate_on_submit():
+       PostData = Posts(
+                country=form.country.data,
+                year=form.year.data,
+                performer=form.performer.data,
+                song=form.song.data
+            )
+         db.session.add(PostData)
+         db.session.commit()
+
+        else:
+            print(form.errors)       
+        return render_template('favorites.html', title='Eurovision Favorite Entries', form=form)
 
 @app.route('/login')
 def login():
