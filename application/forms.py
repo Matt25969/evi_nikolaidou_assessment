@@ -36,8 +36,8 @@ class FavsForm(FlaskForm):
              Length(min=1, max=10000)
         ]
      )
-
-     submit = SubmitField('Add to favorites!')
+    
+    submit = SubmitField('Add to favorites!')
      
 
 class LoginForm(FlaskForm):
